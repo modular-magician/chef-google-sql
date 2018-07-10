@@ -691,6 +691,7 @@ context 'gsql_user' do
                   action :delete
                   host 'test host#0 data'
                   instance 'resource(instance,0)'
+                  password 'test password#0 data'
                   project 'test project#0 data'
                   credential 'mycred'
                 end
@@ -764,6 +765,7 @@ context 'gsql_user' do
                   action :delete
                   host 'test host#0 data'
                   instance 'resource(instance,0)'
+                  password 'test password#0 data'
                   u_label 'test name#0 data'
                   project 'test project#0 data'
                   credential 'mycred'
@@ -846,6 +848,7 @@ context 'gsql_user' do
                   action :delete
                   host 'test host#0 data'
                   instance 'resource(instance,0)'
+                  password 'test password#0 data'
                   project 'test project#0 data'
                   credential 'mycred'
                 end
@@ -925,6 +928,7 @@ context 'gsql_user' do
                   action :delete
                   host 'test host#0 data'
                   instance 'resource(instance,0)'
+                  password 'test password#0 data'
                   u_label 'test name#0 data'
                   project 'test project#0 data'
                   credential 'mycred'

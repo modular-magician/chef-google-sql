@@ -515,7 +515,7 @@ end
   ID.
 
 * `password` -
-  The password for the user.
+  Required. The password for the user.
 
 #### Label
 Set the `u_label` property when attempting to set primary key
