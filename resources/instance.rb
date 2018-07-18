@@ -35,14 +35,17 @@ require 'google/sql/network/get'
 require 'google/sql/network/post'
 require 'google/sql/network/put'
 require 'google/sql/property/boolean'
-require 'google/sql/property/enum'
 require 'google/sql/property/instance_authorized_networks'
+require 'google/sql/property/instance_backend_type'
+require 'google/sql/property/instance_database_version'
 require 'google/sql/property/instance_failover_replica'
+require 'google/sql/property/instance_instance_type'
 require 'google/sql/property/instance_ip_addresses'
 require 'google/sql/property/instance_ip_configuration'
 require 'google/sql/property/instance_mysql_replica_configuration'
 require 'google/sql/property/instance_replica_configuration'
 require 'google/sql/property/instance_settings'
+require 'google/sql/property/instance_type'
 require 'google/sql/property/integer'
 require 'google/sql/property/string'
 require 'google/sql/property/string_array'
@@ -57,18 +60,18 @@ module Google
 
       property :backend_type,
                equal_to: %w[FIRST_GEN SECOND_GEN EXTERNAL],
-               coerce: ::Google::Sql::Property::Enum.coerce, desired_state: true
+               coerce: ::Google::Sql::Property::BackendTypeEnum.coerce, desired_state: true
       property :connection_name
                String, coerce: ::Google::Sql::Property::String.coerce, desired_state: true
       property :database_version,
                equal_to: %w[MYSQL_5_5 MYSQL_5_6 MYSQL_5_7 POSTGRES_9_6],
-               coerce: ::Google::Sql::Property::Enum.coerce, desired_state: true
+               coerce: ::Google::Sql::Property::DatabaseVersionEnum.coerce, desired_state: true
       property :failover_replica,
                [Hash, ::Google::Sql::Data::InstancFailoveReplica],
                coerce: ::Google::Sql::Property::InstancFailoveReplica.coerce, desired_state: true
       property :instance_type,
                equal_to: %w[CLOUD_SQL_INSTANCE ON_PREMISES_INSTANCE READ_REPLICA_INSTANCE],
-               coerce: ::Google::Sql::Property::Enum.coerce, desired_state: true
+               coerce: ::Google::Sql::Property::InstanceTypeEnum.coerce, desired_state: true
       # ip_addresses is Array of Google::Sql::Property::InstancIpAddressArray
       property :ip_addresses,
                Array,
@@ -112,15 +115,15 @@ module Google
         else
           @current_resource = @new_resource.clone
           @current_resource.backend_type =
-            ::Google::Sql::Property::Enum.api_parse(fetch['backendType'])
+            ::Google::Sql::Property::BackendTypeEnum.api_parse(fetch['backendType'])
           @current_resource.connection_name =
             ::Google::Sql::Property::String.api_parse(fetch['connectionName'])
           @current_resource.database_version =
-            ::Google::Sql::Property::Enum.api_parse(fetch['databaseVersion'])
+            ::Google::Sql::Property::DatabaseVersionEnum.api_parse(fetch['databaseVersion'])
           @current_resource.failover_replica =
             ::Google::Sql::Property::InstancFailoveReplica.api_parse(fetch['failoverReplica'])
           @current_resource.instance_type =
-            ::Google::Sql::Property::Enum.api_parse(fetch['instanceType'])
+            ::Google::Sql::Property::InstanceTypeEnum.api_parse(fetch['instanceType'])
           @current_resource.ip_addresses =
             ::Google::Sql::Property::InstancIpAddressArray.api_parse(fetch['ipAddresses'])
           @current_resource.ipv6_address =
