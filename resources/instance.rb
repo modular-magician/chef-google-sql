@@ -96,7 +96,8 @@ module Google
       property :project, String, desired_state: false, required: true
 
       action :create do
-        fetch = fetch_resource(@new_resource, self_link(@new_resource), 'sql#instance')
+        fetch = fetch_resource(@new_resource, self_link(@new_resource),
+                               'sql#instance')
         if fetch.nil?
           converge_by "Creating gsql_instance[#{new_resource.name}]" do
             # TODO(nelsonjr): Show a list of variables to create
@@ -143,7 +144,8 @@ module Google
       end
 
       action :delete do
-        fetch = fetch_resource(@new_resource, self_link(@new_resource), 'sql#instance')
+        fetch = fetch_resource(@new_resource, self_link(@new_resource),
+                               'sql#instance')
         unless fetch.nil?
           converge_by "Deleting gsql_instance[#{new_resource.name}]" do
             delete_req = ::Google::Sql::Network::Delete.new(
