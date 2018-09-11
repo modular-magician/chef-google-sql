@@ -530,20 +530,6 @@ associated SSL Client Key. The Client Key can be downloaded only when the
 SSL certificate is created with the insert method.
 
 
-#### Example
-
-```ruby
-# Tip: Remember to define gsql_instance to match the 'instance' property.
-gsql_ssl_cert 'server-certificate' do
-  cert_serial_number '729335786'
-  common_name 'CN=www.mydb.com,O=Acme'
-  sha1_fingerprint '8fc295bf77a002db5182e04d92c48258cbc1117a'
-  instance "sql-test-#{ENV['sql_instance_suffix']}"
-  project ENV['PROJECT'] # ex: 'my-test-project'
-  credential 'mycred'
-end
-
-```
 
 #### Reference
 
@@ -561,15 +547,6 @@ gsql_ssl_cert 'id-for-resource' do
 end
 ```
 
-#### Actions
-
-* `create` -
-  Converges the `gsql_ssl_cert` resource into the final
-  state described within the block. If the resource does not exist, Chef will
-  attempt to create it.
-* `delete` -
-  Ensures the `gsql_ssl_cert` resource is not present.
-  If the resource already exists Chef will attempt to delete it.
 
 #### Properties
 
@@ -605,17 +582,6 @@ the resource followed by "_label"
 ### gsql_flag
 Represents a flag that can be configured for a Cloud SQL instance.
 
-#### Example
-
-```ruby
-gsql_flag 'group_concat_max_len' do
-  min_value 4
-  max_value 4294967295
-  project ENV['PROJECT'] # ex: 'my-test-project'
-  credential 'mycred'
-end
-
-```
 
 #### Reference
 
@@ -639,15 +605,6 @@ gsql_flag 'id-for-resource' do
 end
 ```
 
-#### Actions
-
-* `create` -
-  Converges the `gsql_flag` resource into the final
-  state described within the block. If the resource does not exist, Chef will
-  attempt to create it.
-* `delete` -
-  Ensures the `gsql_flag` resource is not present.
-  If the resource already exists Chef will attempt to delete it.
 
 #### Properties
 
@@ -689,16 +646,6 @@ tiers vary depending on whether you use PostgreSQL, MySQL Second
 Generation, or MySQL First Generation instances.
 
 
-#### Example
-
-```ruby
-gsql_tier 'D0' do
-  ram 134217728 # we'll confirm that tier has enough RAM for us
-  project ENV['PROJECT'] # ex: 'my-test-project'
-  credential 'mycred'
-end
-
-```
 
 #### Reference
 
@@ -716,15 +663,6 @@ gsql_tier 'id-for-resource' do
 end
 ```
 
-#### Actions
-
-* `create` -
-  Converges the `gsql_tier` resource into the final
-  state described within the block. If the resource does not exist, Chef will
-  attempt to create it.
-* `delete` -
-  Ensures the `gsql_tier` resource is not present.
-  If the resource already exists Chef will attempt to delete it.
 
 #### Properties
 
