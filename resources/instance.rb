@@ -64,15 +64,15 @@ module Google
                equal_to: %w[MYSQL_5_5 MYSQL_5_6 MYSQL_5_7 POSTGRES_9_6],
                coerce: ::Google::Sql::Property::Enum.coerce, desired_state: true
       property :failover_replica,
-               [Hash, ::Google::Sql::Data::InstanceFailoverReplica],
-               coerce: ::Google::Sql::Property::InstanceFailoverReplica.coerce, desired_state: true
+               [Hash, ::Google::Sql::Data::InstanceFailoverreplica],
+               coerce: ::Google::Sql::Property::InstanceFailoverreplica.coerce, desired_state: true
       property :instance_type,
                equal_to: %w[CLOUD_SQL_INSTANCE ON_PREMISES_INSTANCE READ_REPLICA_INSTANCE],
                coerce: ::Google::Sql::Property::Enum.coerce, desired_state: true
-      # ip_addresses is Array of Google::Sql::Property::InstanceIpAddressesArray
+      # ip_addresses is Array of Google::Sql::Property::InstanceIpaddressesArray
       property :ip_addresses,
                Array,
-               coerce: ::Google::Sql::Property::InstanceIpAddressesArray.coerce, desired_state: true
+               coerce: ::Google::Sql::Property::InstanceIpaddressesArray.coerce, desired_state: true
       property :ipv6_address,
                String, coerce: ::Google::Sql::Property::String.coerce, desired_state: true
       property :master_instance_name,
@@ -85,8 +85,8 @@ module Google
                name_property: true, desired_state: true
       property :region, String, coerce: ::Google::Sql::Property::String.coerce, desired_state: true
       property :replica_configuration,
-               [Hash, ::Google::Sql::Data::InstanceReplicaConfiguration],
-               coerce: ::Google::Sql::Property::InstanceReplicaConfiguration.coerce,
+               [Hash, ::Google::Sql::Data::InstanceReplicaconfiguration],
+               coerce: ::Google::Sql::Property::InstanceReplicaconfiguration.coerce,
                desired_state: true
       property :settings,
                [Hash, ::Google::Sql::Data::InstanceSettings],
@@ -118,11 +118,11 @@ module Google
           @current_resource.database_version =
             ::Google::Sql::Property::Enum.api_parse(fetch['databaseVersion'])
           @current_resource.failover_replica =
-            ::Google::Sql::Property::InstanceFailoverReplica.api_parse(fetch['failoverReplica'])
+            ::Google::Sql::Property::InstanceFailoverreplica.api_parse(fetch['failoverReplica'])
           @current_resource.instance_type =
             ::Google::Sql::Property::Enum.api_parse(fetch['instanceType'])
           @current_resource.ip_addresses =
-            ::Google::Sql::Property::InstanceIpAddressesArray.api_parse(fetch['ipAddresses'])
+            ::Google::Sql::Property::InstanceIpaddressesArray.api_parse(fetch['ipAddresses'])
           @current_resource.ipv6_address =
             ::Google::Sql::Property::String.api_parse(fetch['ipv6Address'])
           @current_resource.master_instance_name =
@@ -132,7 +132,7 @@ module Google
           @current_resource.i_label = ::Google::Sql::Property::String.api_parse(fetch['name'])
           @current_resource.region = ::Google::Sql::Property::String.api_parse(fetch['region'])
           @current_resource.replica_configuration =
-            ::Google::Sql::Property::InstanceReplicaConfiguration.api_parse(
+            ::Google::Sql::Property::InstanceReplicaconfiguration.api_parse(
               fetch['replicaConfiguration']
             )
           @current_resource.settings =

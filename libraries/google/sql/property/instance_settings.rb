@@ -91,7 +91,7 @@ module Google
       class InstanceSettingsApi < InstanceSettings
         def initialize(args)
           @ip_configuration =
-            Google::Sql::Property::InstanceIpConfiguration.api_parse(args['ipConfiguration'])
+            Google::Sql::Property::InstanceIpconfiguration.api_parse(args['ipConfiguration'])
           @tier = Google::Sql::Property::String.api_parse(args['tier'])
           @settings_version = Google::Sql::Property::Integer.api_parse(args['settingsVersion'])
         end
@@ -102,7 +102,7 @@ module Google
       class InstanceSettingsCatalog < InstanceSettings
         def initialize(args)
           @ip_configuration =
-            Google::Sql::Property::InstanceIpConfiguration.catalog_parse(args[:ip_configuration])
+            Google::Sql::Property::InstanceIpconfiguration.catalog_parse(args[:ip_configuration])
           @tier = Google::Sql::Property::String.catalog_parse(args[:tier])
           @settings_version = Google::Sql::Property::Integer.catalog_parse(args[:settings_version])
         end

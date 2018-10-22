@@ -29,7 +29,7 @@ module Google
   module Sql
     module Data
       # A class to manage data for IpConfiguration for instance.
-      class InstanceIpConfiguration
+      class InstanceIpconfiguration
         include Comparable
 
         attr_reader :ipv4_enabled
@@ -55,7 +55,7 @@ module Google
         end
 
         def ==(other)
-          return false unless other.is_a? InstanceIpConfiguration
+          return false unless other.is_a? InstanceIpconfiguration
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             return false if compare[:self] != compare[:other]
@@ -64,7 +64,7 @@ module Google
         end
 
         def <=>(other)
-          return false unless other.is_a? InstanceIpConfiguration
+          return false unless other.is_a? InstanceIpconfiguration
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             result = compare[:self] <=> compare[:other]
@@ -88,25 +88,25 @@ module Google
         end
       end
 
-      # Manages a InstanceIpConfiguration nested object
+      # Manages a InstanceIpconfiguration nested object
       # Data is coming from the GCP API
-      class InstanceIpConfigurationApi < InstanceIpConfiguration
+      class InstanceIpconfigurationApi < InstanceIpconfiguration
         def initialize(args)
           @ipv4_enabled = Google::Sql::Property::Boolean.api_parse(args['ipv4Enabled'])
-          @authorized_networks = Google::Sql::Property::InstanceAuthorizedNetworksArray.api_parse(
+          @authorized_networks = Google::Sql::Property::InstanceAuthorizednetworksArray.api_parse(
             args['authorizedNetworks']
           )
           @require_ssl = Google::Sql::Property::Boolean.api_parse(args['requireSsl'])
         end
       end
 
-      # Manages a InstanceIpConfiguration nested object
+      # Manages a InstanceIpconfiguration nested object
       # Data is coming from the Chef catalog
-      class InstanceIpConfigurationCatalog < InstanceIpConfiguration
+      class InstanceIpconfigurationCatalog < InstanceIpconfiguration
         def initialize(args)
           @ipv4_enabled = Google::Sql::Property::Boolean.catalog_parse(args[:ipv4_enabled])
           @authorized_networks =
-            Google::Sql::Property::InstanceAuthorizedNetworksArray.catalog_parse(
+            Google::Sql::Property::InstanceAuthorizednetworksArray.catalog_parse(
               args[:authorized_networks]
             )
           @require_ssl = Google::Sql::Property::Boolean.catalog_parse(args[:require_ssl])
@@ -116,23 +116,23 @@ module Google
 
     module Property
       # A class to manage input to IpConfiguration for instance.
-      class InstanceIpConfiguration
+      class InstanceIpconfiguration
         def self.coerce
-          ->(x) { ::Google::Sql::Property::InstanceIpConfiguration.catalog_parse(x) }
+          ->(x) { ::Google::Sql::Property::InstanceIpconfiguration.catalog_parse(x) }
         end
 
         # Used for parsing Chef catalog
         def self.catalog_parse(value)
           return if value.nil?
-          return value if value.is_a? Data::InstanceIpConfiguration
-          Data::InstanceIpConfigurationCatalog.new(value)
+          return value if value.is_a? Data::InstanceIpconfiguration
+          Data::InstanceIpconfigurationCatalog.new(value)
         end
 
         # Used for parsing GCP API responses
         def self.api_parse(value)
           return if value.nil?
-          return value if value.is_a? Data::InstanceIpConfiguration
-          Data::InstanceIpConfigurationApi.new(value)
+          return value if value.is_a? Data::InstanceIpconfiguration
+          Data::InstanceIpconfigurationApi.new(value)
         end
       end
     end
