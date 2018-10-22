@@ -29,7 +29,7 @@ module Google
   module Sql
     module Data
       # A class to manage data for MysqlReplicaConfiguration for instance.
-      class InstanceMysqlReplicaConfiguration
+      class InstanceMysqlreplicaconfiguration
         include Comparable
 
         attr_reader :ca_certificate
@@ -74,7 +74,7 @@ module Google
         end
 
         def ==(other)
-          return false unless other.is_a? InstanceMysqlReplicaConfiguration
+          return false unless other.is_a? InstanceMysqlreplicaconfiguration
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             return false if compare[:self] != compare[:other]
@@ -83,7 +83,7 @@ module Google
         end
 
         def <=>(other)
-          return false unless other.is_a? InstanceMysqlReplicaConfiguration
+          return false unless other.is_a? InstanceMysqlreplicaconfiguration
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             result = compare[:self] <=> compare[:other]
@@ -116,9 +116,9 @@ module Google
         # rubocop:enable Metrics/MethodLength
       end
 
-      # Manages a InstanceMysqlReplicaConfiguration nested object
+      # Manages a InstanceMysqlreplicaconfiguration nested object
       # Data is coming from the GCP API
-      class InstanceMysqlReplicaConfigurationApi < InstanceMysqlReplicaConfiguration
+      class InstanceMysqlreplicaconfigurationApi < InstanceMysqlreplicaconfiguration
         # rubocop:disable Metrics/MethodLength
         def initialize(args)
           @ca_certificate = Google::Sql::Property::String.api_parse(args['caCertificate'])
@@ -138,9 +138,9 @@ module Google
         # rubocop:enable Metrics/MethodLength
       end
 
-      # Manages a InstanceMysqlReplicaConfiguration nested object
+      # Manages a InstanceMysqlreplicaconfiguration nested object
       # Data is coming from the Chef catalog
-      class InstanceMysqlReplicaConfigurationCatalog < InstanceMysqlReplicaConfiguration
+      class InstanceMysqlreplicaconfigurationCatalog < InstanceMysqlreplicaconfiguration
         # rubocop:disable Metrics/MethodLength
         def initialize(args)
           @ca_certificate = Google::Sql::Property::String.catalog_parse(args[:ca_certificate])
@@ -164,23 +164,23 @@ module Google
 
     module Property
       # A class to manage input to MysqlReplicaConfiguration for instance.
-      class InstanceMysqlReplicaConfiguration
+      class InstanceMysqlreplicaconfiguration
         def self.coerce
-          ->(x) { ::Google::Sql::Property::InstanceMysqlReplicaConfiguration.catalog_parse(x) }
+          ->(x) { ::Google::Sql::Property::InstanceMysqlreplicaconfiguration.catalog_parse(x) }
         end
 
         # Used for parsing Chef catalog
         def self.catalog_parse(value)
           return if value.nil?
-          return value if value.is_a? Data::InstanceMysqlReplicaConfiguration
-          Data::InstanceMysqlReplicaConfigurationCatalog.new(value)
+          return value if value.is_a? Data::InstanceMysqlreplicaconfiguration
+          Data::InstanceMysqlreplicaconfigurationCatalog.new(value)
         end
 
         # Used for parsing GCP API responses
         def self.api_parse(value)
           return if value.nil?
-          return value if value.is_a? Data::InstanceMysqlReplicaConfiguration
-          Data::InstanceMysqlReplicaConfigurationApi.new(value)
+          return value if value.is_a? Data::InstanceMysqlreplicaconfiguration
+          Data::InstanceMysqlreplicaconfigurationApi.new(value)
         end
       end
     end

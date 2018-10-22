@@ -29,7 +29,7 @@ module Google
   module Sql
     module Data
       # A class to manage data for ReplicaConfiguration for instance.
-      class InstanceReplicaConfiguration
+      class InstanceReplicaconfiguration
         include Comparable
 
         attr_reader :failover_target
@@ -56,7 +56,7 @@ module Google
         end
 
         def ==(other)
-          return false unless other.is_a? InstanceReplicaConfiguration
+          return false unless other.is_a? InstanceReplicaconfiguration
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             return false if compare[:self] != compare[:other]
@@ -65,7 +65,7 @@ module Google
         end
 
         def <=>(other)
-          return false unless other.is_a? InstanceReplicaConfiguration
+          return false unless other.is_a? InstanceReplicaconfiguration
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             result = compare[:self] <=> compare[:other]
@@ -90,13 +90,13 @@ module Google
         end
       end
 
-      # Manages a InstanceReplicaConfiguration nested object
+      # Manages a InstanceReplicaconfiguration nested object
       # Data is coming from the GCP API
-      class InstanceReplicaConfigurationApi < InstanceReplicaConfiguration
+      class InstanceReplicaconfigurationApi < InstanceReplicaconfiguration
         def initialize(args)
           @failover_target = Google::Sql::Property::Boolean.api_parse(args['failoverTarget'])
           @mysql_replica_configuration =
-            Google::Sql::Property::InstanceMysqlReplicaConfiguration.api_parse(
+            Google::Sql::Property::InstanceMysqlreplicaconfiguration.api_parse(
               args['mysqlReplicaConfiguration']
             )
           @replica_names = Google::Sql::Property::StringArray.api_parse(args['replicaNames'])
@@ -105,13 +105,13 @@ module Google
         end
       end
 
-      # Manages a InstanceReplicaConfiguration nested object
+      # Manages a InstanceReplicaconfiguration nested object
       # Data is coming from the Chef catalog
-      class InstanceReplicaConfigurationCatalog < InstanceReplicaConfiguration
+      class InstanceReplicaconfigurationCatalog < InstanceReplicaconfiguration
         def initialize(args)
           @failover_target = Google::Sql::Property::Boolean.catalog_parse(args[:failover_target])
           @mysql_replica_configuration =
-            Google::Sql::Property::InstanceMysqlReplicaConfiguration.catalog_parse(
+            Google::Sql::Property::InstanceMysqlreplicaconfiguration.catalog_parse(
               args[:mysql_replica_configuration]
             )
           @replica_names = Google::Sql::Property::StringArray.catalog_parse(args[:replica_names])
@@ -123,23 +123,23 @@ module Google
 
     module Property
       # A class to manage input to ReplicaConfiguration for instance.
-      class InstanceReplicaConfiguration
+      class InstanceReplicaconfiguration
         def self.coerce
-          ->(x) { ::Google::Sql::Property::InstanceReplicaConfiguration.catalog_parse(x) }
+          ->(x) { ::Google::Sql::Property::InstanceReplicaconfiguration.catalog_parse(x) }
         end
 
         # Used for parsing Chef catalog
         def self.catalog_parse(value)
           return if value.nil?
-          return value if value.is_a? Data::InstanceReplicaConfiguration
-          Data::InstanceReplicaConfigurationCatalog.new(value)
+          return value if value.is_a? Data::InstanceReplicaconfiguration
+          Data::InstanceReplicaconfigurationCatalog.new(value)
         end
 
         # Used for parsing GCP API responses
         def self.api_parse(value)
           return if value.nil?
-          return value if value.is_a? Data::InstanceReplicaConfiguration
-          Data::InstanceReplicaConfigurationApi.new(value)
+          return value if value.is_a? Data::InstanceReplicaconfiguration
+          Data::InstanceReplicaconfigurationApi.new(value)
         end
       end
     end
